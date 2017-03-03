@@ -6,11 +6,6 @@ use std::process::Command;
 
 static XRES: usize = 500;
 static YRES: usize = 500;
-static MAXCOL: usize = 255;
-static RED: usize = 0;
-static GREEN: usize = 1;
-static BLUE: usize = 2;
-
 static DEFAULT: [u32; 3] = [0,0,0];
 
 pub fn plot(x: i32, y:i32, screen: &mut [[[u32; 3]; 500]; 500], color: [u32; 3]) {
@@ -74,11 +69,4 @@ pub fn disp(screen: [[[u32; 3]; 500]; 500]) {
 
         print!("rustc failed and stderr was:\n{}", s);
     }
-}
-
-fn main() {
-	let mut screen = [[DEFAULT; 500]; 500];
-	plot(250,250, &mut screen, [255,255,255]);
-	clear_screen(&mut screen);
-	save_ppm(&mut screen, "img.ppm");
 }

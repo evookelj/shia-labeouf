@@ -157,4 +157,10 @@ impl Gmatrix {
 	}
 
 	pub fn print(&self) { self.data.print(); }
+
+	pub fn identity(&self) -> Gmatrix {
+		let mut r = Gmatrix::new();
+		r.data = self.data.identity();
+		return r;
+	}
 }
