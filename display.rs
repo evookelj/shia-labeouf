@@ -13,18 +13,16 @@ static BLUE: usize = 2;
 
 static DEFAULT: [u32; 3] = [0,0,0];
 
-fn plot(screen: &mut [[[u32; 3]; 500]; 500], color: [u32; 3], x: usize, y:usize) {
-	let newy = YRES-1-y;
-	if x<XRES && newy < YRES {
+pub fn plot(x: i32, y:i32, screen: &mut [[[u32; 3]; 500]; 500], color: [u32; 3]) {
+	let newy = YRES-(y as usize)-1;
+	if (x as usize)<XRES && newy < YRES {
 		for i in 0..3 {
-			println!("color[RED] {}", color[RED]);
-			screen[newy][x][i] = color[i];
-			println!("screen[RED] {}",screen[newy][x][RED] );
+			screen[newy][x as usize][i] = color[i];
 		}
 	}
 }
 
-fn clear_screen(screen: &mut [[[u32; 3]; 500]; 500]) {
+pub fn clear_screen(screen: &mut [[[u32; 3]; 500]; 500]) {
 	for y in 0..YRES {
 		for x in 0..XRES {
 			screen[x as usize][y as usize] = DEFAULT;
@@ -32,7 +30,7 @@ fn clear_screen(screen: &mut [[[u32; 3]; 500]; 500]) {
 	}
 }
 
-fn save_ppm(screen: &mut [[[u32; 3]; 500]; 500], f: &str) {
+pub fn save_ppm(screen: &mut [[[u32; 3]; 500]; 500], f: &str) {
 	static HEADER: &'static str = "P3\n500 500 255\n";
 	let path = Path::new(f);
 	let display = path.display();
@@ -60,7 +58,7 @@ fn save_ppm(screen: &mut [[[u32; 3]; 500]; 500], f: &str) {
 	}
 }
 
-fn display(screen: [[[u32; 3]; 500]; 500]) {
+pub fn disp(screen: [[[u32; 3]; 500]; 500]) {
 	    let output = Command::new("rustc")
         .arg("--version")
         .output().unwrap_or_else(|e| {
@@ -80,7 +78,7 @@ fn display(screen: [[[u32; 3]; 500]; 500]) {
 
 fn main() {
 	let mut screen = [[DEFAULT; 500]; 500];
-	plot(&mut screen, [255,255,255],250,250);
+	plot(250,250, &mut screen, [255,255,255]);
 	clear_screen(&mut screen);
 	save_ppm(&mut screen, "img.ppm");
 }
