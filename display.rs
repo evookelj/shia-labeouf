@@ -2,14 +2,12 @@ use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
-use std::process::Command;
 
-static XRES: usize = 500;
-static YRES: usize = 500;
-static DEFAULT: [u32; 3] = [0,0,0];
+pub const XRES: usize = 500;
+pub const YRES: usize = 500;
+pub const DEFAULT: [u32; 3] = [0,0,0];
 
 pub fn plot(x: i32, y:i32, screen: &mut [[[u32; 3]; 500]; 500], color: [u32; 3]) {
-	println!("y {}", y);
 	let newy = YRES-(y as usize)-1;
 	if (x as usize)<XRES && newy < YRES {
 		for i in 0..3 {
@@ -55,19 +53,5 @@ pub fn save_ppm(screen: &mut [[[u32; 3]; 500]; 500], f: &str) {
 }
 
 pub fn disp(screen: [[[u32; 3]; 500]; 500]) {
-	    let output = Command::new("rustc")
-        .arg("--version")
-        .output().unwrap_or_else(|e| {
-            panic!("failed to execute process: {}", e)
-    });
 
-    if output.status.success() {
-        let s = String::from_utf8_lossy(&output.stdout);
-
-        print!("rustc succeeded and stdout was:\n{}", s);
-    } else {
-        let s = String::from_utf8_lossy(&output.stderr);
-
-        print!("rustc failed and stderr was:\n{}", s);
-    }
 }
