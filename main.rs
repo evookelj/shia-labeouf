@@ -28,10 +28,16 @@ fn main() {
 	}
 
 	let scale = gm.make_scale(0.8,0.8,0.8);
+	println!("SCALE MATRIX:");
 	scale.print();
 	let mut gs = scale.m_mult(gm);
 
-	draw_lines(&mut gs, &mut s, [255,209,220]); //ffd1dc
+	let trans = gs.make_trans(-50.0,-50.0,1.0);
+	println!("TRANSLATE MATRIX:");
+	trans.print();
+	let mut gt = trans.m_mult(gs);
+
+	draw_lines(&mut gt, &mut s, [255,209,220]); //ffd1dc
 	save_ppm(&mut s, "img.ppm");
 	disp(s);
 }

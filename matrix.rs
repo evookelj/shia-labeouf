@@ -116,7 +116,7 @@ impl Gmatrix {
 
 	pub fn m_mult(&self, o: Gmatrix) -> Gmatrix {
 		let mut r = Gmatrix::new(); 
-		r.data = self.data.m_mult(&o.data); 
+		r.data = self.data.m_mult(&o.data);
 		return r;
 	}
 
@@ -140,8 +140,15 @@ impl Gmatrix {
 		return r;
 	}
 
-	pub fn make_trans(&self, x: f32, y: f32, z: f32) {
-		return ;
+	pub fn make_trans(&self, x: f32, y: f32, z: f32) -> Gmatrix {
+		let mut r = self.identity();
+		let mut i = 0;
+		r.set_val(i,self.rlen()-1,x);
+		i+=1;
+		r.set_val(i,self.rlen()-1,y);
+		i+=1;
+		r.set_val(i,self.rlen()-1,z);
+		return r;
 	}
 
 	pub fn make_scale(&self, x: f32, y: f32, z: f32) -> Gmatrix {
