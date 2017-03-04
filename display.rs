@@ -9,6 +9,7 @@ static YRES: usize = 500;
 static DEFAULT: [u32; 3] = [0,0,0];
 
 pub fn plot(x: i32, y:i32, screen: &mut [[[u32; 3]; 500]; 500], color: [u32; 3]) {
+	println!("y {}", y);
 	let newy = YRES-(y as usize)-1;
 	if (x as usize)<XRES && newy < YRES {
 		for i in 0..3 {
