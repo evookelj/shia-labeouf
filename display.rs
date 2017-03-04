@@ -2,6 +2,7 @@ use std::error::Error;
 use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
+use std::process::Command;
 
 pub const XRES: usize = 500;
 pub const YRES: usize = 500;
@@ -57,5 +58,11 @@ pub fn save_ppm(screen: &mut [[[u32; 3]; 500]; 500], f: &str) {
 }
 
 pub fn disp(screen: [[[u32; 3]; 500]; 500]) {
+	let output = Command::new("sh")
+                     .arg("-c")
+                     .arg("echo hello")
+                     .output()
+                     .expect("failed to execute process");
 
+	let hello = output.stdout;
 }

@@ -170,7 +170,14 @@ impl Gmatrix {
 		return ;
 	}
 
-	pub fn make_rotZ(&self, theta: f32) {
-		return ;
+	pub fn make_rotZ(&self, theta: f32) -> Gmatrix {
+		let mut r = self.identity();
+		let sin = theta.sin();
+		let cos = theta.cos();
+		r.set_val(0,0,cos);
+		r.set_val(0,1,sin*-1.0);
+		r.set_val(1,0,sin);
+		r.set_val(1,1,cos);
+		return r;
 	}
 }
