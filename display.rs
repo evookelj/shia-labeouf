@@ -57,30 +57,23 @@ pub fn save_ppm(screen: &mut [[[u32; 3]; 500]; 500], f: &str) {
 	}
 }
 
-/*
 fn stringify(screen: &mut [[[u32; 3]; 500]; 500]) -> String {
-	let mut s = String::new();
+	let mut s = "".to_string();
 	for y in 0..YRES {
 		for x in 0..XRES {
 			for i in 0..3 {
-				//s.push_str(format!("{} ",screen[x][y][i]));
-				//s += format!("{} ",screen[x][y][i])
+				s.push_str(&format!("{} ",screen[x][y][i]));
 			}
 			s.push_str("\n");
 		}
 	}
 	return s;
 }
-*/
 
 pub fn disp(screen: &mut [[[u32; 3]; 500]; 500]) {
-	//let s = stringify(screen);
+	let s = stringify(screen);
 	let output = Command::new("sh")
-                     .arg("-c")
-                     .arg("display img.ppm")
-                     .output()
-                     .expect("failed to execute process");
-
-	let hello = output.stdout;
-	println!("{}",hello[0]);
+		.arg("display img.ppm")
+		.output()
+		.expect("failed to execute process");
 }
