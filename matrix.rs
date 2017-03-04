@@ -25,6 +25,10 @@ impl Matrix {
 		return self.data[r as usize][c as usize];
 	}
 
+	pub fn set_val(&mut self, r: usize, c: usize, val: f32) {
+		self.data[r][c] = val;
+	}
+
 	pub fn rlen(&self) -> usize {
 		return self.data.len() as usize;
 	}
@@ -96,6 +100,10 @@ impl Gmatrix {
 
 	pub fn add_val(&mut self, r: usize, val: f32) -> bool { return self.data.add_val(r,val); }
 
+	pub fn set_val(&mut self, r: usize, c: usize, val: f32) {
+		self.data.set_val(r,c,val);
+	}
+
 	pub fn rlen(&self) -> usize { return self.data.rlen(); }
 
 	pub fn clen(&self) -> usize { return self.data.clen(); }
@@ -130,5 +138,32 @@ impl Gmatrix {
 		let mut r = Gmatrix::new();
 		r.data = self.data.identity();
 		return r;
+	}
+
+	pub fn make_trans(&self, x: f32, y: f32, z: f32) {
+		return ;
+	}
+
+	pub fn make_scale(&self, x: f32, y: f32, z: f32) -> Gmatrix {
+		let mut r = self.identity();
+		let mut i = 0;
+		r.set_val(i,i,x);
+		i += 1;
+		r.set_val(i,i,y);
+		i += 1;
+		r.set_val(i,i,z);
+		return r;
+	}
+
+	pub fn make_rotX(&self, theta: f32) {
+		return ;
+	}
+
+	pub fn make_rotY(&self, theta: f32) {
+		return ;
+	}
+
+	pub fn make_rotZ(&self, theta: f32) {
+		return ;
 	}
 }

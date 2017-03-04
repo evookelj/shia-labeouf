@@ -3,5 +3,5 @@ main: main.rs
 
 run: main
 	./main
-	display img.ppm
 	rm main
+	display img.ppm

@@ -8,6 +8,10 @@ pub const YRES: usize = 500;
 pub const DEFAULT: [u32; 3] = [0,0,0];
 
 pub fn plot(x: i32, y:i32, screen: &mut [[[u32; 3]; 500]; 500], color: [u32; 3]) {
+	if x>(XRES as i32)-1 || y>(YRES as i32)-1 {
+		println!("skip");
+		return ;
+	}
 	let newy = YRES-(y as usize)-1;
 	if (x as usize)<XRES && newy < YRES {
 		for i in 0..3 {

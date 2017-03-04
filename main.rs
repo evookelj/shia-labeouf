@@ -15,18 +15,23 @@ fn main() {
 
 	let mut s = [[[0; 3]; 500]; 500];
 	let mut gm = Gmatrix::new();
-	let mut i: i32 = 1;
-	let mut j: i32 = YR-1;
-	while i<XR {
-		while j>0 {
-			gm.add_edge(XR-i, j, YR-j, i);
-			gm.add_edge(XR-i, YR-j, XR-j, YR-i);
+	let mut i: i32 = YR/4;
+	let mut j: i32 = (XR-1)*3/4;
+	while i<(3*YR)/4 {
+		while j>(XR-1)/4 {
+			gm.add_edge(YR-i, j, XR-j, i);
+			gm.add_edge(YR-i, XR-j, YR-j, XR-i);
 			j-= 50;
 		}
-		j = YR-1;
+		j = (XR-1)*3/4;
 		i+=10;
 	}
-	draw_lines(&mut gm, &mut s, [255,209,220]); //ffd1dc
+
+	let scale = gm.make_scale(0.8,0.8,0.8);
+	scale.print();
+	let mut gs = scale.m_mult(gm);
+
+	draw_lines(&mut gs, &mut s, [255,209,220]); //ffd1dc
 	save_ppm(&mut s, "img.ppm");
 	disp(s);
 }
