@@ -37,7 +37,7 @@ fn main() {
 	trans.print();
 	let gt = trans.m_mult(gs);
 
-	let rot = gt.make_rotZ(0.1);
+	let rot = gt.make_rotZ(0.5);
 	println!("ROTZ MATRIX:");
 	rot.print();
 	let mut gr = rot.m_mult(gt);
@@ -45,5 +45,5 @@ fn main() {
 	let mut fin = &mut gr;
 	draw_lines(&mut fin, &mut s, [255,209,220]); //ffd1dc
 	save_ppm(&mut s, "img.ppm");
-	//disp(s);
+	disp(&mut s);
 }
