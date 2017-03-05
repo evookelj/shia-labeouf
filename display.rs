@@ -71,8 +71,8 @@ fn stringify(screen: &mut [[[u32; 3]; 500]; 500]) -> String {
 }
 
 pub fn disp(screen: &mut [[[u32; 3]; 500]; 500]) {
-	let s = stringify(screen);
-	let output = Command::new("sh")
+	Command::new("sh")
+		.arg("-c")
 		.arg("display img.ppm")
 		.output()
 		.expect("failed to execute process");
