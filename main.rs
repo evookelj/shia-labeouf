@@ -1,6 +1,7 @@
 mod matrix;
 mod display;
 mod draw;
+mod parser;
 
 use matrix::Gmatrix;
 use display::save_ppm;
@@ -8,6 +9,7 @@ use draw::draw_lines;
 use display::disp;
 use display::XRES;
 use display::YRES;
+use parser::parse_file;
 
 fn main() {
 	const XR: i32 = XRES as i32;
@@ -48,5 +50,7 @@ fn main() {
 
 	draw_lines(&mut gm, &mut s, [255,209,220]); //ffd1dc
 	save_ppm(&mut s, "img.ppm");
-	disp(&mut s);
+	//disp(&mut s);
+
+	parse_file("script", &mut shia, &mut gm, &mut s);
 }
