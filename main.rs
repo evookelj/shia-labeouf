@@ -17,6 +17,8 @@ fn main() {
 
 	let mut s = [[[0; 3]; 500]; 500];
 	let mut gm = Gmatrix::new();
+
+	/*
 	let mut i: i32 = YR/4;
 	let mut j: i32 = (XR-1)*3/4;
 	while i<(3*YR)/4 {
@@ -28,9 +30,11 @@ fn main() {
 		j = (XR-1)*3/4;
 		i+=10;
 	}
+*/
 
 	let mut shia = gm.identity();
 
+/*
 	let scale = gm.make_scale(0.8,0.8,0.8);
 	println!("SCALE MATRIX:");
 	scale.print();
@@ -51,6 +55,7 @@ fn main() {
 	draw_lines(&mut gm, &mut s, [255,209,220]); //ffd1dc
 	save_ppm(&mut s, "img.ppm");
 	//disp(&mut s);
+	*/
 
 	parse_file("script", &mut shia, &mut gm, &mut s);
 }
