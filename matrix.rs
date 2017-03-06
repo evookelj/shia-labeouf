@@ -120,6 +120,10 @@ impl Gmatrix {
 		return r;
 	}
 
+	pub fn edit_mult(&mut self, o: Gmatrix) {
+		self.data = self.data.m_mult(&o.data);
+	}
+
 	pub fn add_pt(&mut self, x0: i32, y0: i32) {
 		self.add_val(0, x0 as f32);
 		self.add_val(1, y0 as f32);

@@ -27,23 +27,26 @@ fn main() {
 		i+=10;
 	}
 
+	let mut shia = gm.identity();
+
 	let scale = gm.make_scale(0.8,0.8,0.8);
 	println!("SCALE MATRIX:");
 	scale.print();
-	let gs = scale.m_mult(gm);
+	shia.edit_mult(scale);
 
-	let trans = gs.make_trans(-50.0,-50.0,1.0);
+	let trans = gm.make_trans(-50.0,-50.0,1.0);
 	println!("TRANSLATE MATRIX:");
 	trans.print();
-	let mut gt = trans.m_mult(gs);
+	shia.edit_mult(trans);
 
-	let rot = gt.make_rotZ(30.0);
+	let rot = gm.make_rotZ(30.0);
 	println!("ROTZ MATRIX:");
 	rot.print();
-	let mut gr = rot.m_mult(gt);
+	shia.edit_mult(rot);
 
-	let mut fin = &mut gr;
-	draw_lines(&mut fin, &mut s, [255,209,220]); //ffd1dc
+	gm = shia.m_mult(gm);
+
+	draw_lines(&mut gm, &mut s, [255,209,220]); //ffd1dc
 	save_ppm(&mut s, "img.ppm");
 	disp(&mut s);
 }
