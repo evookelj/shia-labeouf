@@ -162,18 +162,35 @@ impl Gmatrix {
 		return r;
 	}
 
-	pub fn make_rotX(&self, theta: f32) {
-		return ;
+	pub fn make_rotX(&self, theta: f32) -> Gmatrix {
+		let mut r = self.identity();
+		let ang = theta.to_radians();
+		let sin = ang.sin();
+		let cos = ang.cos();
+		r.set_val(1,1,cos);
+		r.set_val(1,2,sin*-1.0);
+		r.set_val(2,1,sin);
+		r.set_val(2,2,cos);
+		return r;
 	}
 
-	pub fn make_rotY(&self, theta: f32) {
-		return ;
+	pub fn make_rotY(&self, theta: f32) -> Gmatrix {
+		let mut r = self.identity();
+		let ang = theta.to_radians();
+		let cos = ang.cos();
+		let sin = ang.sin();
+		r.set_val(0,0,cos);
+		r.set_val(0,2,sin);
+		r.set_val(2,0,sin*-1.0);
+		r.set_val(2,2,cos);
+		return r;
 	}
 
 	pub fn make_rotZ(&self, theta: f32) -> Gmatrix {
+		let mut ang = theta.to_radians();
 		let mut r = self.identity();
-		let sin = theta.sin();
-		let cos = theta.cos();
+		let sin = ang.sin();
+		let cos = ang.cos();
 		r.set_val(0,0,cos);
 		r.set_val(0,1,sin*-1.0);
 		r.set_val(1,0,sin);

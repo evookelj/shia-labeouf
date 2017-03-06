@@ -35,9 +35,9 @@ fn main() {
 	let trans = gs.make_trans(-50.0,-50.0,1.0);
 	println!("TRANSLATE MATRIX:");
 	trans.print();
-	let gt = trans.m_mult(gs);
+	let mut gt = trans.m_mult(gs);
 
-	let rot = gt.make_rotZ(0.5);
+	let rot = gt.make_rotZ(30.0);
 	println!("ROTZ MATRIX:");
 	rot.print();
 	let mut gr = rot.m_mult(gt);

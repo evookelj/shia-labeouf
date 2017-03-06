@@ -47,24 +47,20 @@ pub fn save_ppm(screen: &mut [[[u32; 3]; 500]; 500], f: &str) {
 		Err(why) => panic!("Error writing header because {}", why.description()),
 		Ok(_) => (),
 	};
-	for y in 0..YRES {
-		for x in 0..XRES {
-			match file.write_all(format!("{} {} {}\n",screen[x][y][0],screen[x][y][1],screen[x][y][2]).as_bytes()) {
-				Err(why) => panic!("Error writing pixel {} {} because {}", x, y, why.description()),
-				Ok(_) => (),
-			};
-		}
-	}
+	match file.write_all(stringify(&screen).as_bytes()) {
+		Err(why) => panic!("Error writing screen bc {}", why.description()),
+		Ok(_) => (),
+	};
 }
 
-fn stringify(screen: &mut [[[u32; 3]; 500]; 500]) -> String {
+fn stringify(screen: &[[[u32; 3]; 500]; 500]) -> String {
 	let mut s = "".to_string();
 	for y in 0..YRES {
 		for x in 0..XRES {
 			for i in 0..3 {
 				s.push_str(&format!("{} ",screen[x][y][i]));
 			}
-			s.push_str("\n");
+			s.push_str(" ");
 		}
 	}
 	return s;
