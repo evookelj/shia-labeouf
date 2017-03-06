@@ -6,6 +6,7 @@ use std::io;
 use std::path::Path;
 use matrix::Gmatrix;
 use display::disp;
+use display::save_ppm;
 
 pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen: &mut [[[u32; 3]; 500]; 500]) {
 	let f = File::open(name).unwrap();
@@ -29,6 +30,8 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 				let mut transf = Gmatrix::new();
 				transf = edges.identity();
 			}
+
+			"save" => save_ppm(screen,&l),
 
 			"" => {
 				if l=="display" {
