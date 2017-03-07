@@ -30,8 +30,10 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 			"line" => {
  				edges.add_edge(vec[0].parse().unwrap(), 
  					vec[1].parse().unwrap(), 
+ 					vec[2].parse().unwrap(),
  					vec[3].parse().unwrap(), 
- 					vec[4].parse().unwrap());
+ 					vec[4].parse().unwrap(),
+ 					vec[5].parse().unwrap());
  				last = String::from("");
 			}
 			"scale" => {
