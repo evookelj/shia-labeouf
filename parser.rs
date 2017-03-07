@@ -23,7 +23,7 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 			"save" => {
 				save_ppm(screen, vec[0]);
 			 	last = String::from("");
-			 						for y in 0..screen.len() {
+			 	for y in 0..screen.len() {
 						println!("clearing..");
 						screen[y] = [[0; 3]; 500];
 					}
@@ -66,7 +66,9 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 			}
 			_ => {
 				match l.trim() {
-				"ident" => transf = edges.identity(),
+				"ident" => {
+					transf = edges.identity();
+				}
 				"apply" => transf.edit_mult(edges),
 				"display" => {
 					draw_lines(edges, screen, [255,209,220]);
