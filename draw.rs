@@ -90,7 +90,10 @@ fn draw_line(x0: i32, y0: i32, x1: i32, y1: i32, screen: &mut [[[u32; 3]; 500]; 
 }
 
 pub fn draw_lines(gm: &mut Gmatrix, screen: &mut [[[u32; 3]; 500]; 500], color: [u32; 3]) {
-	for i in 0..gm.clen()-1 {
+	let mut i = 0;
+	println!("gm.clen() {}",gm.clen() );
+	while i<gm.clen() {
+		println!("i {}", i);
 		draw_line(
 			gm.get_val(0,i) as i32, //x0 
 			gm.get_val(1,i) as i32, 
@@ -98,5 +101,11 @@ pub fn draw_lines(gm: &mut Gmatrix, screen: &mut [[[u32; 3]; 500]; 500], color: 
 			gm.get_val(1,i+1) as i32,
 			screen,
 			color);
+		println!("line {} {} to {} {}", 
+			gm.get_val(0,i) as i32, //x0 
+			gm.get_val(1,i) as i32, 
+			gm.get_val(0,i+1) as i32, //y0 
+			gm.get_val(1,i+1) as i32);
+		i += 2;
 	}
 }

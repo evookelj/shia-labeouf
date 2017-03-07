@@ -11,21 +11,21 @@ use draw::draw_lines;
 pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen: &mut [[[u32; 3]; 500]; 500]) {
 	let f = File::open(name).unwrap();
 	let file = BufReader::new(&f);
-	let mut last = String::new();
+	let mut last = String::from("");
 	let mut l: String;
-	let mut transf = Gmatrix::new();
 	for line in file.lines() {
 		l = line.unwrap();
-		println!("last {}\nthis {}\n", last, l);
 
 		let split = l.split(" ");
  		let vec: Vec<&str> = split.collect();
+
+
 		match last.trim() {
 			"save" => {
 				draw_lines(edges, screen, [255,255,255]);
 				save_ppm(screen, vec[0]);
-			 	last = String::from("");
 			 	clear_screen(screen);
+			 	println!("\n\n\n");
 			 }
 			"line" => {
  				edges.add_edge(vec[0].parse().unwrap(), 
@@ -34,7 +34,6 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
  					vec[3].parse().unwrap(), 
  					vec[4].parse().unwrap(),
  					vec[5].parse().unwrap());
- 				last = String::from("");
 			}
 			"scale" => {
 				let scale = edges.make_scale(
@@ -42,8 +41,7 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 					vec[1].parse().unwrap(),
 					vec[2].parse().unwrap()
 					);
-				scale.edit_mult(&mut transf);
-				last = String::from("");
+				scale.edit_mult(transf);
 			}
 			"move" => {
 				let trans = edges.make_trans(
@@ -51,8 +49,7 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 					vec[1].parse().unwrap(),
 					vec[2].parse().unwrap()
 				);
-				trans.edit_mult(&mut transf);
-				last = String::from("");
+				trans.edit_mult(transf);
 			}
 			"rotate" => {
 				let mut rot = Gmatrix::new();
@@ -63,15 +60,19 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 					_ => ()
 				}
 				transf.print();
-				rot.edit_mult(&mut transf);
+				rot.edit_mult(transf);
 				println!("AFTER:");
 				transf.print();
-				last = String::from("");
 			}
 			_ => {
 				match l.trim() {
 				"ident" => {
-					transf = edges.identity();
+					let g = edges.identity();
+					for i in 0..g.rlen() {
+						for c in 0..g.clen() {
+							transf.set_val(i,c,g.get_val(i,c));
+						}
+					}
 				}
 				"apply" => transf.edit_mult(edges),
 				"display" => {
@@ -83,5 +84,6 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 				last = String::from(vec[0]);
 			}
 		}
+		if (last != String::from(vec[0])) { last = String::from(""); }
 	}
 }

@@ -68,10 +68,12 @@ fn stringify(screen: &[[[u32; 3]; 500]; 500]) -> String {
 
 pub fn disp(screen: &mut [[[u32; 3]; 500]; 500]) {
 	save_ppm(screen, "img.ppm");
+	/*
 	Command::new("sh")
 		.arg("-c")
 		.arg("display")
 		.arg("img.ppm")
 		.output()
 		.expect("failed to execute process");
+		*/
 }
