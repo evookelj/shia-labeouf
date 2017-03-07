@@ -191,7 +191,7 @@ impl Gmatrix {
 	}
 
 	pub fn make_rotZ(&self, theta: f32) -> Gmatrix {
-		let mut ang = theta.to_radians();
+		let ang = theta.to_radians();
 		let mut r = self.identity();
 		let sin = ang.sin();
 		let cos = ang.cos();
