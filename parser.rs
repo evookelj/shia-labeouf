@@ -59,10 +59,10 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 					"z" => rot = edges.make_rotZ(vec[1].parse().unwrap()),
 					_ => ()
 				}
-				transf.print();
+				edges.print();
 				rot.edit_mult(transf);
 				println!("AFTER:");
-				transf.print();
+				edges.print();
 			}
 			_ => {
 				match l.trim() {
