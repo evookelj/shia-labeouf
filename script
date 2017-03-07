@@ -36,4 +36,20 @@ move
 apply
 save
 imgMove.ppm
+ident
+rotate
+z 20
+rotate
+x 20
+rotate
+y 20
+apply
+save
+imgRot.ppm
+ident
+rotate
+y 20
+apply
+save
+imgFin.ppm
 
