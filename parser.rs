@@ -1,11 +1,12 @@
 use std::fs::File;
 use std::io::BufReader;
 use std::io::BufRead;
+use std::string::String;
 use matrix::Gmatrix;
 use display::disp;
+use display::clear_screen;
 use display::save_ppm;
 use draw::draw_lines;
-use std::string::String;
 
 pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen: &mut [[[u32; 3]; 500]; 500]) {
 	let f = File::open(name).unwrap();
@@ -21,12 +22,10 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
  		let vec: Vec<&str> = split.collect();
 		match last.trim() {
 			"save" => {
+				draw_lines(edges, screen, [255,255,255]);
 				save_ppm(screen, vec[0]);
 			 	last = String::from("");
-			 	for y in 0..screen.len() {
-						println!("clearing..");
-						screen[y] = [[0; 3]; 500];
-					}
+			 	clear_screen(screen);
 			 }
 			"line" => {
  				edges.add_edge(vec[0].parse().unwrap(), 
@@ -61,7 +60,10 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 					"z" => rot = edges.make_rotZ(vec[1].parse().unwrap()),
 					_ => ()
 				}
+				transf.print();
 				rot.edit_mult(&mut transf);
+				println!("AFTER:");
+				transf.print();
 				last = String::from("");
 			}
 			_ => {
@@ -71,7 +73,7 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 				}
 				"apply" => transf.edit_mult(edges),
 				"display" => {
-					draw_lines(edges, screen, [255,209,220]);
+					draw_lines(edges, screen, [255,255,255]);
 					disp(screen);
 				}
 				_ => (),
