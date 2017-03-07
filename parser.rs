@@ -23,6 +23,10 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 		let mut split = l.split(" ");
  		let vec: Vec<&str> = split.collect();
 		match last.trim() {
+			"save" => {
+				save_ppm(screen, vec[0]);
+			 	last = String::from("");
+			 }
 			"line" => {
  				edges.add_edge(vec[0].parse().unwrap(), 
  					vec[1].parse().unwrap(), 
@@ -37,7 +41,7 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 					vec[2].parse().unwrap()
 					);
 				scale.edit_mult(&mut transf);
-								last = String::from("");
+				last = String::from("");
 			}
 			"move" => {
 				let trans = edges.make_trans(
@@ -46,7 +50,7 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 					vec[2].parse().unwrap()
 				);
 				trans.edit_mult(&mut transf);
-								last = String::from("");
+				last = String::from("");
 			}
 			"rotate" => {
 				let mut rot = Gmatrix::new();
@@ -57,7 +61,7 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 					_ => ()
 				}
 				rot.edit_mult(&mut transf);
-								last = String::from("");
+				last = String::from("");
 			}
 			_ => {
 				match l.trim() {
@@ -67,7 +71,6 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 					draw_lines(edges, screen, [255,209,220]);
 					disp(screen);
 				}
-				"save" => save_ppm(screen, "img.ppm"),
 				_ => (),
 				}
 				last = String::from(vec[0]);
