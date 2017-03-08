@@ -19,8 +19,6 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 		let split = l.split(" ");
  		let vec: Vec<&str> = split.collect();
 
- 		println!("last {}\nthis {}\n", last, l);
-
 		match last.trim() {
 			"save" => {
 				draw_lines(edges, screen, [255,255,255]);
@@ -76,7 +74,13 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 						}
 					}
 				}
-				"apply" => transf.edit_mult(edges),
+				"apply" => {
+					println!("BEFORE: ");
+					edges.print();
+					transf.edit_mult(edges);
+					println!("AFTER:");
+					edges.print();
+				}
 				"display" => {
 					draw_lines(edges, screen, [255,255,255]);
 					disp(screen);

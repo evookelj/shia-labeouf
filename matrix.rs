@@ -133,7 +133,7 @@ impl Gmatrix {
 
 	pub fn add_edge(&mut self,x0:i32,y0:i32,z0:i32,x1:i32,y1:i32,z1:i32) {
 		self.add_pt(x0, y0, z0);
-		self.add_pt(x1, y1, z0);
+		self.add_pt(x1, y1, z1);
 	}
 
 	pub fn print(&self) { self.data.print(); }
