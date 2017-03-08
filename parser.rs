@@ -74,13 +74,7 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 						}
 					}
 				}
-				"apply" => {
-					println!("BEFORE: ");
-					edges.print();
-					transf.edit_mult(edges);
-					println!("AFTER:");
-					edges.print();
-				}
+				"apply" => transf.edit_mult(edges),
 				"display" => {
 					draw_lines(edges, screen, [255,255,255]);
 					disp(screen);
