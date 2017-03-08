@@ -22,6 +22,7 @@ pub fn parse_file(name: &str, transf: &mut Gmatrix, edges: &mut Gmatrix, screen:
 		match last.trim() {
 			"save" => {
 				draw_lines(edges, screen, [255,255,255]);
+				println!("Saved current as {}..", vec[0]);
 				save_ppm(screen, vec[0]);
 			 	clear_screen(screen);
 			 	last = String::from("");
