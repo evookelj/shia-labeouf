@@ -16,7 +16,8 @@ pub fn plot(x: i32, y:i32, screen: &mut [[[u32; 3]; 500]; 500], color: [u32; 3])
 	let newy = YRES-(y as usize)-1;
 	if (x as usize)<XRES && newy < YRES {
 		for i in 0..3 {
-			screen[newy][x as usize][i] = color[i];
+			//screen[newy][x as usize][i] = color[i];
+			screen[x as usize][newy][i] = color[i];
 		}
 	}
 }
