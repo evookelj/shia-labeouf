@@ -53,13 +53,11 @@ scale
 2 2 2
 apply
 display
-img.ppm
 ident
 move
 100 100 0
 apply
 display
-img.ppm
 ident
 rotate
 z 20
@@ -69,12 +67,10 @@ rotate
 y 20
 apply
 display
-img.ppm
 ident
 rotate
 y 20
 apply
 display
-img.ppm
 save
 imgFin.ppm
