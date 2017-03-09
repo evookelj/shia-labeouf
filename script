@@ -47,19 +47,19 @@ line
 line
 75 25 25 75 25 75
 display
-imgOrig.ppm
+img.ppm
 ident
 scale
 2 2 2
 apply
-save
-imgScale.ppm
+display
+img.ppm
 ident
 move
 100 100 0
 apply
-save
-imgMove.ppm
+display
+img.ppm
 ident
 rotate
 z 20
@@ -68,11 +68,13 @@ x 20
 rotate
 y 20
 apply
-save
-imgRot.ppm
+display
+img.ppm
 ident
 rotate
 y 20
 apply
+display
+img.ppm
 save
 imgFin.ppm
